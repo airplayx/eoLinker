@@ -1,0 +1,36 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+    "background": {
+        "scripts": ["js/libs/jquery-3.2.1.min.js", "js/libs/crypto-js.js", "js/libs/require.js","js/libs/polyfill-2.5.0.min.js","js/libs/xml2json.js","js/bundle/test.min.js"]
+    },
+    "manifest_version": 2,
+    "name": "eoLinker接口测试增强插件",
+    "author": "scar",
+    "short_name": "eo-extension",
+    "version": "4.0.1",
+    "description": "eoLinker是国内第一个对本地服务器进行复杂接口测试的在线接口管理平台，不需要任何复杂的配置，您只需在浏览器中安装一个插件，我们将自动为你准备好一切",
+    "nacl_modules": [{
+        "path": "OpenOfficeViewer.nmf",
+        "mime_type": "application/eolinker"
+    }],
+    "browser_action": {
+        "default_icon": {
+            "19": "images/icon19.png",
+            "38": "images/icon38.png"
+        },
+        "default_title": "eolinker接口测试增强插件",
+        "default_popup": "html/popup.html"
+    },
+    "icons": {
+        "16": "images/icon16.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+    },
+    "content_scripts": [{
+        "matches": ["*://*/*"],
+        "js": ["js/libs/jquery-3.2.1.min.js", "js/bundle/content.min.js"]
+    }],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "permissions": ["management", "tabs", "activeTab", "webNavigation", "storage", "unlimitedStorage", "webRequest", "webRequestBlocking", "cookies", "\u003Call_urls>", "clipboardWrite"]
+}
