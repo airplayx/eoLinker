@@ -43,36 +43,18 @@ eoLinker提供了非常强大的在线API接口测试功能，在使用之前，
 4. 支持简易、高级自动化测试
 5. 支持全局变量等需要插件支持的测试
 
-插件获取地址：[请点击这里获取插件](https://www.eolinker.com/#/plug/introduce "请点击这里获取插件")
+插件获取地址：本项目内 eo-chrome-extension 文件夹即为扩展程序文件夹
 
-目前插件支持Chrome以及Firefox浏览器，其中Chrome插件需要翻墙下载，或者安装由我们提供的离线安装包，Firefox则无需翻墙。
-
-**注意**：eoLinker API 测试增强插件需要配合[eoLinker线上网站](https://www.eolinker.com "eoLinker线上网站")或者开源版产品使用。
+插件仅支持Chrome。
 
 ---
 
 #### 安装
 
 **Chrome：**
-1. 通过Google Market获取（推荐），能够自动更新版本。需要翻墙下载，否则无法访问，地址为：
-	[https://chrome.google.com/webstore/detail/eolinker/mdbgchaihbacjfjeikflfbelidihhmfn](https://chrome.google.com/webstore/detail/eolinker/mdbgchaihbacjfjeikflfbelidihhmfn "https://chrome.google.com/webstore/detail/eolinker/mdbgchaihbacjfjeikflfbelidihhmfn")
-	
-2. 下载插件压缩包，手动导入，无法自动更新版本，无需翻墙。可在文件夹中找到相应版本。
 
-**Firefox：**
-1. 必须通过Firefox addon市场下载，地址为：
-[https://addons.mozilla.org/zh-CN/firefox/addon/eolinker/](https://addons.mozilla.org/zh-CN/firefox/addon/eolinker/ "https://addons.mozilla.org/zh-CN/firefox/addon/eolinker/")
+1.打开扩展程序或地址栏输入回车 chrome://extensions
 
----
-
-#### 检测
-
-在需要通过插件进行测试的功能中，会有相应的提示是否已经正确安装插件，如果正常安装插件，则会显示类似的界面：
-
-![](http://data.eolinker.com/course/hrDhmQW598c9b26f75684b14b09ce9f22898b6ffcf9481b)
-
-若看到黄色提示框，则表示插件尚未正确安装或者版本过旧，需要安装或者更新：
-
-![](http://data.eolinker.com/course/TKg88gsd74def9adc4f3accddc736b729323dbcece971ff)
+2.开启开发者模式 -> 加载已解压的扩展程序 -> 选中打开的 eo-chrome-extension 文件夹
 
 ---
