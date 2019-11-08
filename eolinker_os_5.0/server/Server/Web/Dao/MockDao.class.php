@@ -116,4 +116,68 @@ class MockDao
             return FALSE;
         }
     }
+
+        /**
+         * 保存简易mock
+         */
+        public function saveSimpleMock(&$project_id, &$api_id, &$user_id, &$mock_type, &$mock_data, &$status_code)
+        {
+        	$db = getDatabase();
+        	try
+        	{
+        		if($mock_type == 0)
+        		{
+        			$db->prepareExecute("UPDATE eo_ams_api SET apiSuccessMock  = ?, updateUserID = ?, apiUpdateTime = ?,apiSuccessStatusCode = ? WHERE apiID  = ? AND projectID = ?", Array(
+        					$mock_data,
+        					$user_id,
+        					date("Y-m-d H:i:s", time()),
+        					$status_code,
+        					$api_id,
+        					$project_id
+        					));
+        			$api = $db->prepareExecute("SELECT cacheID,apiJson FROM eo_ams_api_cache WHERE apiID = ?", array($api_id));
+        			if($api)
+        			{
+        				$api_json = json_decode($api['apiJson'], TRUE);
+        				$api_json['baseInfo']['apiSuccessMock'] = $mock_data;
+        				$api_json['baseInfo']['apiSuccessStatusCode'] = $status_code;
+        				$api_json = Json_encode($api_json);
+        				$db->prepareExecute("UPDATE eo_ams_api_cache SET apiJson = ?, updateUserID =? WHERE cacheID = ?", Array(
+        						$api_json,
+        						$user_id,
+        						$api['cacheID']
+        						));
+        			}
+        		}
+        		else
+        		{
+        			$db->prepareExecute("UPDATE eo_ams_api SET apiFailureMock  = ?, updateUserID = ?, apiUpdateTime = ?,apiSuccessStatusCode = ? WHERE apiID  = ? AND projectID = ?", Array(
+        					$mock_data,
+        					$user_id,
+        					date("Y-m-d H:i:s", time()),
+        					$status_code,
+        					$api_id,
+        					$project_id
+        					));
+        			$api = $db->prepareExecute("SELECT cacheID,apiJson FROM eo_ams_api_cache WHERE apiID = ?", array($api_id));
+        			if($api)
+        			{
+        				$api_json = json_decode($api['apiJson'], TRUE);
+        				$api_json['baseInfo']['apiFailureMock'] = $mock_data;
+        				$api_json['baseInfo']['apiFailureStatusCode'] = $status_code;
+        				$api_json = Json_encode($api_json);
+        				$db->prepareExecute("UPDATE eo_ams_api_cache SET apiJson = ?, updateUserID =? WHERE cacheID = ?", Array(
+        						$api_json,
+        						$user_id,
+        						$api['cacheID']
+        						));
+        			}
+        		}
+        		return TRUE;
+        	}
+        	catch(\PDOException $e)
+        	{
+        		return FALSE;
+        	}
+        }
 }

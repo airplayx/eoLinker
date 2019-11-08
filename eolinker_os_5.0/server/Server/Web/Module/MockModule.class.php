@@ -54,4 +54,31 @@ class MockModule
         $dao = new MockDao();
         return $dao->getMockResult($project_id, $api_uri, $request_type);
     }
+
+    /**
+     * 保存简易mock
+     * @param $project_id
+     * @param $api_id
+     * @param $mock_type
+     * @param $mock_data
+     * @param $status_code
+     * @return bool
+     */
+    public function saveSimpleMock(&$project_id, &$api_id, &$mock_type, &$mock_data, &$status_code)
+    {
+        $apiDao = new ApiDao();
+        $projectDao = new ProjectDao();
+        if ($apiDao->checkApiPermission($api_id, $_SESSION['userID'])) {
+            if ($project_id = $apiDao->checkApiPermission($api_id, $_SESSION['userID'])) {
+                $projectDao->updateProjectUpdateTime($project_id);
+                $dao = new MockDao();
+                return $dao->saveSimpleMock($project_id, $api_id, $_SESSION['userID'], $mock_type, $mock_data, $status_code);
+            }else {
+               return FALSE;
+            }
+        } else
+            return FALSE;
+    }
+
+
 }

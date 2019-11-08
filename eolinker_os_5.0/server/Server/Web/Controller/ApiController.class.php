@@ -752,7 +752,7 @@ class ApiController
     	}
     	else
     	{
-    			$service = new ApiModule;
+    			$service = new MockModule;
     			$result = $service -> saveSimpleMock($projectID, $api_id, $mock_type, $mock_data, $status_code);
     			
     			// 验证结果
