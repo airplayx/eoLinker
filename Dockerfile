@@ -1,18 +1,14 @@
-FROM php:7.4-fpm
+FROM php:7.1-apache
 
 WORKDIR /var/www/html
 
 COPY . .
-
-RUN pecl install redis
 RUN apt-get update && \
     apt-get install -y \
         libzip-dev \
-        libhiredis-dev \
-        wget \
-        cron \
-    && docker-php-ext-install pdo pdo_mysql zip pcntl fileinfo \
-    && docker-php-ext-enable redis
+        libonig-dev \
+    && docker-php-ext-install pdo pdo_mysql zip pcntl fileinfo
 
-EXPOSE 9000
-CMD ["php-fpm"]
+RUN chmod -R 777 /var/www/html
+
+EXPOSE 80
