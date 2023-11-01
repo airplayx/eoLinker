@@ -31,9 +31,9 @@ services:
     networks:
       - app-network
 
-  eoLinker:
-    image: airplayx/eoLinker
-    container_name: eoLinker
+  eolinker:
+    image: airplayx/eolinker
+    container_name: eolinker
     restart: unless-stopped
     networks:
       - app-network

@@ -4,8 +4,8 @@ on:
     branches: [ "5.0" ]
 
 env:
-  APP_NAME: eoLinker
-  DOCKERHUB_REPO: airplayx/eoLinker
+  APP_NAME: eolinker
+  DOCKERHUB_REPO: airplayx/eolinker
 
 jobs:
   main:
