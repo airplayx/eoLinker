@@ -1,0 +1,9 @@
+.git
+.github
+.idea
+.run
+.env
+/deploy
+*.log
+Dockerfile
+docker-compose.yml
