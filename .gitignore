@@ -3,3 +3,4 @@
 *.log
 eo_config.php
 _metadata
+/deploy/mysql/init/create_databases.sql

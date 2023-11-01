@@ -1,0 +1,57 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7.27
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+      TZ: Asia/Shanghai
+      DATABASES:
+        ${MYSQL_DBNAME}
+    entrypoint:
+      bash -c "DBs=($${DATABASES//,/ });
+      for db in $${DBs[@]};
+      do
+      echo   "'"CREATE DATABASE IF NOT EXISTS $$db;"'" >> /docker-entrypoint-initdb.d/create_databases.sql;
+      done;
+      docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      "
+    command: [
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci'
+    ]
+    ports:
+      - '3306:3306'
+    volumes:
+      - '/usr/local/mysql:/var/lib/mysql'
+      - ./deploy/mysql/init:/docker-entrypoint-initdb.d
+      - ./deploy/mysql/conf.d:/etc/mysql/conf.d
+    networks:
+      - app-network
+
+  eoLinker:
+    image: airplayx/eoLinker
+    container_name: eoLinker
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:1.15.8
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./deploy/nginx:/etc/nginx
+      - ./deploy/nginx/log:/var/log/nginx
+      - ./deploy/web:/www/web
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
