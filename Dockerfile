@@ -1,5 +1,6 @@
 FROM php:7.1-apache
 
+ENV TZ Asia/Shanghai
 WORKDIR /var/www/html
 
 COPY . .
