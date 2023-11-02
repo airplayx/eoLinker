@@ -17,7 +17,6 @@ services:
       echo   "'"CREATE DATABASE IF NOT EXISTS $$db;"'" >> /docker-entrypoint-initdb.d/create_databases.sql;
       done;
       docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-      rm -rf /docker-entrypoint-initdb.d/create_databases.sql
       "
     command: [
       '--character-set-server=utf8mb4',
